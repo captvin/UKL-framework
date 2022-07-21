@@ -38,8 +38,8 @@ client.on('message', msg => {
 });
 
 client.on('message',msg =>{
-  if(msg.body == 'check '){
-
+  if(msg.body == 'about'){
+    msg.reply('program ini dibuat untuk fitur website yang digunakan UKL. POWERD BY '+'*'+'ALVIN'+'*')
   }
 })
 
