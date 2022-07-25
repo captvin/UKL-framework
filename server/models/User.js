@@ -26,7 +26,16 @@ const User = db.define("user", {
     email:{
         type: Sequelize.STRING,
         allowNull: false,
-    }
+    },
+    tlp: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    alamat: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+
 }, {
     freezeTableName: true,
     timestamps: false
