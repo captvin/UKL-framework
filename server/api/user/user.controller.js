@@ -63,15 +63,7 @@ module.exports = {
     }
     ,
 
-    // controller_register:function(req,res){
-    //     var { nama_user, role, username, password } = req.body
-    //     var data_user = { nama_user, role, username, password }
-    //     const salt = bcrypt.genSaltSync(10);
-
-    //     data_petugas.password = bcrypt.hashSync(data_petugas.password, salt)
-    //     add(data_user, (err, result) => service_callback(err, result, res))
-    // },
-
+    
     controller_login: function (req, res) {
         get_user_by_username(req.body.username, (err, results) => {
             if (err) console.log(err)

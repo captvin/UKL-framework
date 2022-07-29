@@ -1,3 +1,26 @@
-2022/07/25-14:24:30.779 1a34 Reusing MANIFEST D:\UKLfull\server\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2022/07/25-14:24:30.940 1a34 Recovering log #193
-2022/07/25-14:24:30.965 1a34 Reusing old log D:\UKLfull\server\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000193.log 
+2022/07/25-14:42:19.687 2cc4 Reusing MANIFEST D:\UKLfull\server\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/07/25-14:42:19.687 2cc4 Recovering log #193
+2022/07/25-14:42:20.008 2cc4 Reusing old log D:\UKLfull\server\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000193.log 
+2022/07/25-14:42:33.635 10a8 Level-0 table #205: started
+2022/07/25-14:42:33.928 10a8 Level-0 table #205: 1283876 bytes OK
+2022/07/25-14:42:33.990 10a8 Delete type=0 #193
+2022/07/25-14:42:34.661 30b4 Compacting 1@1 + 8@2 files
+2022/07/25-14:42:35.016 30b4 Generated table #206@1: 43357 keys, 2270792 bytes
+2022/07/25-14:42:35.226 30b4 Generated table #207@1: 10901 keys, 2176787 bytes
+2022/07/25-14:42:35.449 30b4 Generated table #208@1: 3053 keys, 2165858 bytes
+2022/07/25-14:42:35.661 30b4 Generated table #209@1: 3334 keys, 2165672 bytes
+2022/07/25-14:42:35.947 30b4 Generated table #210@1: 26132 keys, 2259887 bytes
+2022/07/25-14:42:36.229 30b4 Generated table #211@1: 20878 keys, 2218676 bytes
+2022/07/25-14:42:36.779 30b4 Generated table #212@1: 82934 keys, 2228227 bytes
+2022/07/25-14:42:37.279 30b4 Generated table #213@1: 63294 keys, 1410254 bytes
+2022/07/25-14:42:37.279 30b4 Compacted 1@1 + 8@2 files => 16896153 bytes
+2022/07/25-14:42:37.355 30b4 compacted to: files[ 0 0 8 0 0 0 0 ]
+2022/07/25-14:42:37.355 30b4 Delete type=2 #195
+2022/07/25-14:42:37.355 30b4 Delete type=2 #196
+2022/07/25-14:42:37.355 30b4 Delete type=2 #197
+2022/07/25-14:42:37.355 30b4 Delete type=2 #198
+2022/07/25-14:42:37.355 30b4 Delete type=2 #199
+2022/07/25-14:42:37.355 30b4 Delete type=2 #200
+2022/07/25-14:42:37.355 30b4 Delete type=2 #201
+2022/07/25-14:42:37.355 30b4 Delete type=2 #202
+2022/07/25-14:42:37.356 30b4 Delete type=2 #205
