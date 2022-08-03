@@ -1,9 +1,18 @@
-const express = require('express')
-const router = require('./router/home') // <--
-const app = express()
+var express = require('express');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var routes = require('./routes')
+var errorHandler = require('./middlewares/errorHandler')
 
-app.use('/', router) // <--
+var app = express();
 
-app.listen(3000, function () {
-    console.log('aplikasi berjalan pada port 3000')
-})
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+app.use(routes)
+
+app.use(errorHandler)
+
+module.exports = app;
