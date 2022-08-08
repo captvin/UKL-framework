@@ -71,21 +71,41 @@ module.exports = {
     },
 
     login: async function (req,res,next){
-        try{
-            const result = await user.findOne(req.body, {where: {username}})
-        }
-    }
+        get_user_by_email(req.body.email, (err, results) => {
+            if (err) console.log(err)
+            else if (!results) {
+                return response_format(res, 0, "Invalid email!").status(501)
+            }
 
-    getWithPembayaran: async function (req, res, next) {
-        try {
-            const { id } = req.params
-            const result = await Petugas.findAll({ include: ['pembayaran'], where: { id } })
-            next(result)
-        }
-        catch (err) {
-            next(err)
-        }
+            const password_matched = bcrypt.compareSync(req.body.password, results.password)
+
+            if (password_matched) {
+                results.password = undefined
+                const jsonwebtoken = sign(
+                    { results },
+                    process.env.JWT_SECRET_KEY,
+                    { expiresIn: "3d" }
+                )
+                return response_format(res, 1, "Login successful!", { account: results, token: jsonwebtoken })
+            }
+
+            else {
+                return response_format(res, 0, "Wrong password!",).status(403)
+            }
+
+        })
     },
+
+    // getWithPembayaran: async function (req, res, next) {
+    //     try {
+    //         const { id } = req.params
+    //         const result = await Petugas.findAll({ include: ['pembayaran'], where: { id } })
+    //         next(result)
+    //     }
+    //     catch (err) {
+    //         next(err)
+    //     }
+    // },
 
     resultHandler: function (prev, req, res, next) {
         if (prev === 0 || prev[0] === 0) {

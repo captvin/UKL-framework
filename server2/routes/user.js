@@ -3,13 +3,13 @@ const Router = require('express').Router()
 const {
     get,
     getById,
-    getWithPembayaran,
     insert,
     update,
     destroy,
+    login,
     resultHandler
 } = require('../controllers/user')
-const schemaValidation = require('../schema_validations/petugas.schema')
+const schemaValidation = require('../schema_validations/schema-user')
 
 Router
     .get('/', get)
@@ -17,6 +17,7 @@ Router
     .post('/', schemaValidation, insert)
     .patch('/:id', update)
     .delete('/:id', destroy)
+    .post('/login', login)
 
 Router
     .use('/', resultHandler)

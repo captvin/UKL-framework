@@ -1,5 +1,5 @@
 //import auth
-const auth = require("../auth")
+const auth = require("../middlewares/auth")
 const jwt = require("jsonwebtoken")
 const SECRET_KEY = "BelajarNodeJSItuMenyengankan"
 
