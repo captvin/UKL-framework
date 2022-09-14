@@ -2,8 +2,8 @@ const Joi = require('joi')
 const ValidateSchema = require('@middlewares/validate-schema')
 
 const schema = {
-    name: Joi.string(),
-    alamat: Joi.string()
+    namaKelas: Joi.string(),
+    jurusan: Joi.string().valid('RPL', 'TKJ'),
 }
 
 const UpdateSchema = Joi.object(schema)
@@ -13,3 +13,4 @@ module.exports = {
     UpdateKelasSchema: ValidateSchema(UpdateSchema),
     CreateKelasSchema: ValidateSchema(CreateSchema)
 }
+

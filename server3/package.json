@@ -1,5 +1,5 @@
 {
-  "name": "server3",
+  "name": "server-baru",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "@casl/ability": "^6.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "dotenv": "^16.0.2",
+    "dotenv": "^16.0.1",
     "express": "~4.16.1",
     "faker": "^5.5.3",
     "glob": "^8.0.3",
@@ -17,11 +17,10 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "log4js": "^6.6.1",
-    "md5": "^2.3.0",
     "module-alias": "^2.2.2",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.21.6"
+    "sequelize": "^6.21.3"
   },
   "_moduleAliases": {
     "@root": ".",

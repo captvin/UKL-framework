@@ -1,22 +1,22 @@
 const { Ability, AbilityBuilder } = require('@casl/ability')
-const { outlet, Pembayaran, Petugas, Siswa, Spp } = require('@models')
+const { Kelas, Pembayaran, Petugas, Siswa, Spp, User } = require('@models')
 
 const abilities = (id, role) => {
     const { can, cannot, build } = new AbilityBuilder(Ability)
 
     switch (role) {
-        case 'superadmin':
-            can('manage', [outlet, Pembayaran, Petugas, Siswa, Spp])
-            break;
         case 'admin':
+            can('manage', [Kelas, Pembayaran, Petugas, Siswa, Spp, User])
+            break;
+        case 'kasir':
             can('create', [Pembayaran])
-            can('read', [outlet, Pembayaran, Petugas, Siswa, Spp])
+            can('read', [Kelas, Pembayaran, Petugas, Siswa, Spp, User])
             can('update', [Pembayaran], { idPetugas: id })
-            can('update', Petugas, { id })
+            can('update', User, { id })
             can('delete', [Pembayaran], { idPetugas: id })
             break;
         case 'owner':
-            can('read', [outlet, Pembayaran, Petugas, Siswa, Spp])
+            can('read', [Kelas, Pembayaran, Petugas, Siswa, Spp, User])
             break;
         default:
             break;
