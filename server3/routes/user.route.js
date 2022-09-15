@@ -5,7 +5,7 @@ const LogRequest = require('@middlewares/log-request')
 const { findAll, findById, create, update, remove } = require('@controllers/user.controller')
 const { UpdateUserSchema, CreateUserSchema } = require('@validations/user.schema')
 
-const { LoggerMiddleware } = new LogRequest('SISWA_ROUTE')
+const { LoggerMiddleware } = new LogRequest('USER_ROUTE')
 
 Router
     .use(LoggerMiddleware, AuthGuard)
