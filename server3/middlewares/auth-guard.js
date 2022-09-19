@@ -3,6 +3,7 @@ const Abilities = require('@utils/ability')
 const { Forbidden, Unauthorized } = require('http-errors')
 const { ErrorHandler } = require('@middlewares/error-handler')
 
+require('dotenv').config()
 var { JWT_SECRET_KEY } = process.env
 
 module.exports = function (req, res, next) {

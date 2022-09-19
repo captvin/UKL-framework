@@ -37,7 +37,7 @@ async function findById(req, res, next) {
         return next(Forbidden())
     }
     const { id } = req.params
-    const { getPembayaran, getKelas } = req.query
+    const { getTransaksi, getKelas } = req.query
     const option = {
         include: []
     }
@@ -53,21 +53,29 @@ async function create(req, res, next) {
     if (req.user.abilities.cannot('create', user)) {
         return next(Forbidden())
     }
-    const { body } = req
-    const result = await user.create(body)
-    res.json(result)
-}
+    try{
+        const { body } = req
+        const result = await user.create(body)
+        res.json(result)
+    } catch (err) {
+        console.log(err)
+    }
+    
+} 
 
 async function update(req, res, next) {
     if (req.user.abilities.cannot('update', user)) {
         return next(Forbidden())
     }
-    const { id } = req.params
-    const { body } = req
-    const result = await user.update(body, { where: { id } })
-    result[0]
+
+        const { id } = req.params
+        const { body } = req
+        const result = await user.update(body, { where: { id } })
+        result[0]
         ? res.json({ message: 'Successfully updated' })
         : next(NotFound())
+    
+    
 }
 
 async function remove(req, res, next) {
