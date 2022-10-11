@@ -28,6 +28,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DOUBLE
       },
+      total: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       keterangan: {
         allowNull: true,
         type: Sequelize.TEXT

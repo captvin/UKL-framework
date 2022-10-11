@@ -36,10 +36,7 @@ module.exports = {
         allowNull: true,
         type: Sequelize.DATE
       },
-      total: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
+      
       status: {
         allowNull: false,
         type: Sequelize.ENUM('baru', 'proses', 'selesai', 'diambil')

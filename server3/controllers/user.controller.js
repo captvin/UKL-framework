@@ -1,6 +1,7 @@
 const { user } = require('@models')
 const { NotFound, Forbidden } = require('http-errors')
 const { Op } = require('sequelize')
+const { hashPass } = require('@utils/hashPass')
 
 async function findAll(req, res, next) {
     if (req.user.abilities.cannot('read', user)) {
@@ -18,12 +19,15 @@ async function findAll(req, res, next) {
         where: {}
     }
 
-    const { name } = req.query
-
+    const { role, username, name } = req.query
     if (name) {
-        options.where['name'] = {
-            [Op.like]: `%${name}%`
-        }
+        options.where['role'] = role
+    }
+    if (username) {
+        options.where['username'] = { [Op.like]: `%${username}%` }
+    }
+    if (name) {
+        options.where['name'] = { [Op.like]: `%${name}%` }
     }
 
     const result = await user.findAndCountAll(options)
@@ -36,16 +40,13 @@ async function findById(req, res, next) {
     if (req.user.abilities.cannot('read', user)) {
         return next(Forbidden())
     }
-    const { id } = req.params
-    const { getTransaksi, getKelas } = req.query
-    const option = {
-        include: []
+    const relations = []
+    if (req.query.getTransaksi === 'true') {
+        relations.push('transaksi')
     }
-    if (getPembayaran == 'true') option.include.push('pembayaran')
-    if (getKelas == 'true') option.include.push('kelas')
-    const result = await user.findByPk(id, option)
-    result
-        ? res.json(result)
+    const user = await user.findByPk(req.params.id, { include: relations })
+    user
+        ? res.send(user)
         : next(NotFound())
 }
 
@@ -53,13 +54,18 @@ async function create(req, res, next) {
     if (req.user.abilities.cannot('create', user)) {
         return next(Forbidden())
     }
-    try{
-        const { body } = req
-        const result = await user.create(body)
-        res.json(result)
-    } catch (err) {
-        console.log(err)
+    const { body } = req
+    body.password = await hashPass(body.password)
+    const username = req.body.username
+    const already =await user.findOne({where: {username}})
+    if (already) {
+        return res.send({message: "Username already to use"})
     }
+    else{
+        const result = await user.create(body)
+        res.send(result)
+    }
+    
     
 } 
 
@@ -70,13 +76,39 @@ async function update(req, res, next) {
 
         const { id } = req.params
         const { body } = req
-        const result = await user.update(body, { where: { id } })
-        result[0]
-        ? res.json({ message: 'Successfully updated' })
-        : next(NotFound())
-    
-    
+        const data = await user.findOne({where : {id}})
+        body.password = (data.password)
+        // body.password = await hashPass(body.password)
+        const username = req.body.username
+        const already =await user.findOne({where: {username}})
+        if (already) {
+            return res.send({message: "Username already to use"})
+        }
+        else{
+            const result = await user.update(body, { where: { id } })
+            result[0]
+            ? res.json({ message: 'Successfully updated' })
+            : next(NotFound())
+        }
+       
 }
+
+async function changePass(req, res, next) {
+    const { abilities } = req.user
+    let user = await user.findByPk(req.params.id)
+    if (!user) {
+        return next(NotFound())
+    } else if (abilities.cannot('update', user)) {
+        return next(Forbidden())
+    }
+
+    const password = await hashPass(req.body.password)
+    await user.update({ password })
+    return res.send({
+        message: "Successfully changed user's password"
+    })
+}
+
 
 async function remove(req, res, next) {
     if (req.user.abilities.cannot('delete', user)) {
@@ -94,5 +126,6 @@ module.exports = {
     findById,
     create,
     update,
-    remove
+    remove,
+    changePass
 }
