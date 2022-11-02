@@ -75,7 +75,7 @@ async function update(req, res, next) {
     const jenis = req.body.jenis
     const already =await paket.findOne({where: {jenis}})
     if (already) {
-        return res.send({message: "Name already exists"})
+        return res.send({message: "Paket already exists"})
     }
     else{
         const result = await paket.update(body, { where: { id } })

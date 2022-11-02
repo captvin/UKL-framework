@@ -11,12 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.transaksi, {
+        as: 'transaksi',
+        foreignKey: 'id_detail',
+        onDelete: 'NO ACTION'
+      })
     }
   }
   detail.init({
-    id_transaksi: DataTypes.INTEGER,
     id_paket: DataTypes.INTEGER,
     qty: DataTypes.DOUBLE,
+    total: DataTypes.INTEGER,
     keterangan: DataTypes.TEXT
   }, {
     sequelize,

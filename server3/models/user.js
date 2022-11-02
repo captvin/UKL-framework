@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.outlet, { foreignKey: "id_outlet", as: "outlet", onDelete: 'CASCADE' });
+      this.hasMany(models.transaksi, {
+        foreignKey: "id_user",
+        as: "transaksi",
+      });
     }
   }
   user.init({
