@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
-import { ArrowRight } from 'react-feather';
+// import { ArrowRight } from 'react-feather';
 import Navbar from '../components/Navbar';
 import NavbarOwner from '../components/NavbarOwner';
 import NavbarKasir from '../components/NavbarKasir';

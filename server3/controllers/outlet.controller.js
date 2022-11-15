@@ -33,16 +33,13 @@ async function findById(req, res, next) {
     if (req.user.abilities.cannot('read', outlet)) {
         return next(Forbidden())
     }
-    const { id } = req.params
-    const { getTransaksi, getUser } = req.query
-    const options = {
-        include: []
+    const relations = []
+    if (req.query.getOutlet === 'true') {
+        relations.push('user')
     }
-    if (getTransaksi == 'true') options.include.push('transaksi')
-    if (getUser == 'true') options.include.push('user')
-    const result = await outlet.findByPk(id, options)
+    const outlet = await outlet.findByPk(req.params.id, { include: relations })
     result
-        ? res.json(result)
+        ? res.send(outlet)
         : next(NotFound())
 }
 

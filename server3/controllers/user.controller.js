@@ -1,4 +1,4 @@
-const { user } = require('@models')
+const { user, outlet } = require('@models')
 const { NotFound, Forbidden } = require('http-errors')
 const { Op } = require('sequelize')
 const { hashPass } = require('@utils/hashPass')
@@ -20,6 +20,7 @@ async function findAll(req, res, next) {
     }
 
     const { role, username, name } = req.query
+   
     if (name) {
         options.where['role'] = role
     }
@@ -30,7 +31,7 @@ async function findAll(req, res, next) {
         options.where['name'] = { [Op.like]: `%${name}%` }
     }
 
-    const result = await user.findAndCountAll(options)
+    const result = await user.findAndCountAll({include:"outlet"});
     const totalPage = Math.ceil(result.count / limit)
 
     res.json({ currentPage: page, totalPage, rowLimit: limit, ...result })
@@ -44,9 +45,9 @@ async function findById(req, res, next) {
     if (req.query.getTransaksi === 'true') {
         relations.push('transaksi')
     }
-    const user = await user.findByPk(req.params.id, { include: relations })
-    user
-        ? res.send(user)
+    const result = await user.findByPk(req.params.id, { include: "outlet" })
+    result
+        ? res.send(result)
         : next(NotFound())
 }
 
@@ -80,7 +81,7 @@ async function update(req, res, next) {
         body.password = (data.password)
         // body.password = await hashPass(body.password)
         const username = req.body.username
-        const already =await user.findOne({where: {username}})
+        const already =await user.findOne({where:{[Op.and]: [{username:{[Op.like]:username}},{id:{[Op.ne]:id}}]} })
         if (already) {
             return res.send({message: "Username already to use"})
         }

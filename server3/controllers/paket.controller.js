@@ -1,6 +1,6 @@
 const { paket } = require('@models')
 const { NotFound, Forbidden } = require('http-errors')
-const { Op } = require('sequelize')
+const { Op, where } = require('sequelize')
 
 async function findAll(req, res, next) {
     if (req.user.abilities.cannot('read', paket)) {
@@ -72,15 +72,15 @@ async function update(req, res, next) {
     }
     const { id } = req.params
     const { body } = req
-    const jenis = req.body.jenis
-    const already =await paket.findOne({where: {jenis}})
+    const jenis1 = req.body.jenis
+    const already =await paket.findOne({where:{[Op.and]: [{jenis:{[Op.like]:jenis1}},{id:{[Op.ne]:id}}]} })
     if (already) {
         return res.send({message: "Paket already exists"})
     }
     else{
         const result = await paket.update(body, { where: { id } })
         result[0]
-            ? res.json({ message: 'Successfully updated' })
+            ? res.json({ message: 'Successfully updated',  })
             : next(NotFound())
     }
     

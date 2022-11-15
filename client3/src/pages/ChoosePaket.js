@@ -5,7 +5,7 @@ import NavbarOwner from '../components/NavbarOwner';
 import Card from '../components/Card';
 import axios from 'axios';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { MdAdd, MdEdit, MdDeleteOutline } from 'react-icons/md';
+// import { MdAdd, MdEdit, MdDeleteOutline } from 'react-icons/md';
 
 
 class ChoosePaket extends Component {

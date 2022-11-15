@@ -1,0 +1,14 @@
+.active {
+ background-color: rgb(239 68 68);
+ margin-left: -23px;
+ padding-left: 38px;
+ color: #fff;
+ border-radius: 99999px;
+}
+.active:hover {
+ background-color: rgb(239 68 68);
+ margin-left: -23px;
+ padding-left: 38px;
+ color: #fff;
+ border-radius: 99999px;
+}
